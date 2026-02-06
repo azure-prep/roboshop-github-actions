@@ -1,4 +1,4 @@
-name: Terraform apply
+name: ci-dev
 on:
   push:
    branches:
@@ -7,4 +7,4 @@ jobs:
   Build:
     runs-on: self-hosted
     steps: # Sequence of tasks
-      - run: echo Hello, world! # A shell command
+      - run: echo Hello, world!

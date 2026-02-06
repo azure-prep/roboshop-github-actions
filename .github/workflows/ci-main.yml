@@ -1,4 +1,4 @@
-name: Terraform apply
+name: ci-main
 on:
   push:
     branches:
