@@ -1,10 +1,10 @@
 name: ci-dev
+
 on:
-  push:
-   branches:
-    - 'ROBO-'
+  workflow_call:
+
 jobs:
   Build:
     runs-on: self-hosted
-    steps: # Sequence of tasks
-      - run: echo Hello, world!
+    steps:
+      - run: echo "Hello, world!"
