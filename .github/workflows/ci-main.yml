@@ -1,0 +1,11 @@
+name: Terraform apply
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  Build:
+    runs-on: self-hosted
+    steps: # Sequence of tasks
+      - run: echo Hello, world! # A shell command
