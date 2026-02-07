@@ -9,5 +9,5 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
-      - if: ${{ inputs.appType == 'Nodejs' }}
+      - if: ${{ inputs.appType  == 'Nodejs' }}
         run: npm install
