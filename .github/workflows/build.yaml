@@ -9,4 +9,5 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello ${{ inputs.appType }}"
+      - if: ${{ inputs.appType == 'Nodejs' }}
+        run: npm install
