@@ -1,10 +1,8 @@
-name: ci-dev
-
+name: CI - dev
 on:
   workflow_call:
-
 jobs:
   Build:
-    runs-on: self-hosted
-    steps:
-      - run: echo "Hello, world!"
+    uses: azure-prep/roboshop-github-actions/.github/workflows/build.yml@main
+    with:
+      appType: ${{ inputs.appType }}
