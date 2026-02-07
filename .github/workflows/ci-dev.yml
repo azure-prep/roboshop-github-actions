@@ -3,6 +3,6 @@ on:
   workflow_call:
 jobs:
   Build:
-    uses: azure-prep/roboshop-github-actions/.github/workflows/build.yml@main
+    uses: azure-prep/roboshop-github-actions/.github/workflows/build.yaml@main
     with:
       appType: ${{ inputs.appType }}
