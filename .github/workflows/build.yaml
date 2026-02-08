@@ -10,7 +10,7 @@ on:
 jobs:
   NodeJs_Build:
     if: ${{ inputs.appType == 'Nodejs' }}
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,7 +21,7 @@ jobs:
 
   Java_Build:
     if: ${{ inputs.appType == 'Java' }}
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
