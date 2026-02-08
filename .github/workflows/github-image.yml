@@ -1,0 +1,14 @@
+name: github-image.yml
+on: workflow_dispatch
+
+jobs:
+  docker_build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: docker build
+        run: |
+          cd ../docker-image-runner
+          docker build -t chandralekhas/github-runner:latest .
+          docker login -u chandralekhas -p ${{ secrets.DOCKER_PASS }}
