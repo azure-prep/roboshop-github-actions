@@ -8,15 +8,24 @@ on:
         type: string
 
 jobs:
-  Build:
+  NodeJs_Build:
+    if: ${{ inputs.appType == 'Nodejs' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Build NodeJS app
-        if: ${{ inputs.appType == 'Nodejs' }}
         run: |
-          ls -ltr
-          pwd
           npm install
+
+    Java_Build:
+      if: ${{ inputs.appType == 'Java' }}
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+
+        - name: Build Java app
+          run: |
+            mvn package   
