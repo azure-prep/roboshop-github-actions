@@ -9,6 +9,9 @@ jobs:
         uses: actions/checkout@v4
       - name: docker build
         run: |
+          pwd
+          ls -ltr
           cd ../docker-image-runner
           docker build -t chandralekhas/github-runner:latest .
           docker login -u chandralekhas -p ${{ secrets.DOCKER_PASS }}
+          docker push chandralekhas/github-runner:latest
