@@ -19,13 +19,13 @@ jobs:
         run: |
           npm install
 
-    Java_Build:
-      if: ${{ inputs.appType == 'Java' }}
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v4
+  Java_Build:
+    if: ${{ inputs.appType == 'Java' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-        - name: Build Java app
-          run: |
-            mvn package   
+      - name: Build Java app
+        run: |
+          mvn package   
