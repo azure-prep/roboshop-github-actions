@@ -1,5 +1,7 @@
 name: github-image.yml
-on: workflow_dispatch
+on:
+  workflow_dispatch
+
 
 jobs:
   docker_build:
