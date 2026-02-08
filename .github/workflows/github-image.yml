@@ -11,7 +11,7 @@ jobs:
         run: |
           pwd
           ls -ltra
-          cd .github/workflows/github-image.yml
+          cd .github/docker-image-runner
           docker build -t chandralekhas/github-runner:latest .
           docker login -u chandralekhas -p ${{ secrets.DOCKER_PASS }}
           docker push chandralekhas/github-runner:latest
