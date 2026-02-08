@@ -11,4 +11,5 @@ jobs:
     steps:
       - if: ${{ inputs.appType  == 'Nodejs' }}
         run: |
+        ls -ltr
         pwd; npm install
