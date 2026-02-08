@@ -10,8 +10,8 @@ jobs:
       - name: docker build
         run: |
           pwd
-          ls -ltr
-          cd ../docker-image-runner
+          ls -ltra
+          cd roboshop-github-actions/.github/workflows/github-image.yml
           docker build -t chandralekhas/github-runner:latest .
           docker login -u chandralekhas -p ${{ secrets.DOCKER_PASS }}
           docker push chandralekhas/github-runner:latest
