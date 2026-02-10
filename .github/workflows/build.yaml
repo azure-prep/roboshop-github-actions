@@ -10,7 +10,7 @@ on:
         required: true
         type: string
     secrets:
-      TOKEN:
+      vault_token:
         required: true
 
 jobs:
@@ -27,7 +27,7 @@ jobs:
         id: import-secrets
         with:
           url: http://vault-int.azdevopsb1.online:8200
-          token: ${{ secrets.TOKEN }}
+          token: ${{ secrets.vault_token }}
           secrets: |
             roboshop-infra/data/azure-sp ARM_CLIENT_ID | ARM_CLIENT_ID ;
             roboshop-infra/data/azure-sp ARM_CLIENT_SECRET | ARM_CLIENT_SECRET ;
