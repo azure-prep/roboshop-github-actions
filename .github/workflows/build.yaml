@@ -32,15 +32,13 @@ jobs:
             roboshop-infra/data/azure-sp ARM_CLIENT_SECRET | ARM_CLIENT_SECRET ;
             roboshop-infra/data/azure-sp ARM_TENANT_ID | ARM_TENANT_ID ;
 
-      - name: Build nodejs app
-        if: ${{ inputs.appType == 'Nodejs' }}
-        run: | 
-          npm install
-
-      - name: Build  java app
-        if: ${{ inputs.appType == 'Java' }}
+      - name: Build application
         run: |
-          mvn package
+          if [ "${{ inputs.appType }}" = "Nodejs" ]; then
+            npm install
+          elif [ "${{ inputs.appType }}" = "Java" ]; then
+            mvn package
+          fi
 
       - name: Docker build
         run: |
