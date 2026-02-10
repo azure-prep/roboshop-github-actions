@@ -9,6 +9,9 @@ on:
       appName:
         required: true
         type: string
+    secrets:
+      TOKEN:
+        required: true
 
 jobs:
   NodeJs_Build:
