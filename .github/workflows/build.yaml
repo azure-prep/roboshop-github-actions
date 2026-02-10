@@ -18,10 +18,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Import Secrets
+        # Use the latest version of the action
+        uses: hashicorp/vault-action@v2
+        id: import-secrets
+        with:
+          url: http://vault-int.azdevopsb1.online:8200
+          token: ${{ secrets.TOKEN }}
+          secrets: |
+            roboshop-infra/data/azure-sp ARM_CLIENT_ID | ARM_CLIENT_ID ;
+            roboshop-infra/data/azure-sp ARM_CLIENT_SECRET | ARM_CLIENT_SECRET ;
+            roboshop-infra/data/azure-sp ARM_TENANT_ID | ARM_TENANT_ID ;
+
       - name: Build  NodeJS app
         run: |
-          npm install
+          export TF_VAR_ARM_CLIENT_ID="${{ env.ARM_CLIENT_ID }}"
+          export TF_VAR_ARM_CLIENT_SECRET="${{ env.ARM_CLIENT_SECRET }}"
+          export TF_VAR_ARM_TENANT_ID="${{ env.ARM_TENANT_ID }}"
+          az login --service-principal --username ${TF_VAR_ARM_CLIENT_ID} --password ${TF_VAR_ARM_CLIENT_SECRET} --tenant ${TF_VAR_ARM_TENANT_ID};
           az acr login --name azuredevopsb84.azurecr.io
+          npm install
           docker build -t azuredevopsb84.azurecr.io/roboshop-${{ inputs.appName }}
 #
 #
