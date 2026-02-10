@@ -35,7 +35,7 @@ jobs:
           export TF_VAR_ARM_CLIENT_ID="${{ env.ARM_CLIENT_ID }}"
           export TF_VAR_ARM_CLIENT_SECRET="${{ env.ARM_CLIENT_SECRET }}"
           export TF_VAR_ARM_TENANT_ID="${{ env.ARM_TENANT_ID }}"
-          az login --service-principal --username ${TF_VAR_ARM_CLIENT_ID} --password ${TF_VAR_ARM_CLIENT_SECRET} --tenant ${TF_VAR_ARM_TENANT_ID};
+          az login --service-principal  --username ${TF_VAR_ARM_CLIENT_ID} --password ${TF_VAR_ARM_CLIENT_SECRET} --tenant ${TF_VAR_ARM_TENANT_ID};
           az acr login --name azuredevopsb84.azurecr.io
           npm install
           docker build -t azuredevopsb84.azurecr.io/roboshop-${{ inputs.appName }}
