@@ -18,6 +18,7 @@ jobs:
       - name: Build  NodeJS app
         run: |
           npm install
+          docker ps
 
   Java_Build:
     if: ${{ inputs.appType == 'Java' }}
