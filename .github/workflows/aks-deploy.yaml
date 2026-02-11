@@ -3,10 +3,10 @@ name: CI - dev
 on:
   workflow_call:
     inputs:
-      appType:
+      resource_group_name:
         required: true
         type: string
-      appName:
+      appEnv:
         required: true
         type: string
     secrets:
@@ -32,20 +32,11 @@ jobs:
             roboshop-infra/data/azure-sp ARM_CLIENT_SECRET | ARM_CLIENT_SECRET ;
             roboshop-infra/data/azure-sp ARM_TENANT_ID | ARM_TENANT_ID ;
 
-      - name: Build application
-        run: |
-          if [ "${{ inputs.appType }}" = "Nodejs" ]; then
-            npm install
-          elif [ "${{ inputs.appType }}" = "Java" ]; then
-            mvn package
-          fi
-
-      - name: Docker build
+      - name: helm deploy
         run: |
           export TF_VAR_ARM_CLIENT_ID="${{ env.ARM_CLIENT_ID }}"
           export TF_VAR_ARM_CLIENT_SECRET="${{ env.ARM_CLIENT_SECRET }}"
           export TF_VAR_ARM_TENANT_ID="${{ env.ARM_TENANT_ID }}"
           az login --service-principal  --username ${TF_VAR_ARM_CLIENT_ID} --password ${TF_VAR_ARM_CLIENT_SECRET} --tenant ${TF_VAR_ARM_TENANT_ID};
           az acr login --name azuredevopsb84.azurecr.io
-          docker build -t azuredevopsb84.azurecr.io/roboshop-${{ inputs.appName }}:${{ github.sha }} .
-          docker push azuredevopsb84.azurecr.io/roboshop-${{ inputs.appName }}:${{ github.sha }}
+          az aks get-credentials --resource-group ${{inputs.resource_group_name}} --name  main-${{inputs.appEnv}} --overwrite-existing

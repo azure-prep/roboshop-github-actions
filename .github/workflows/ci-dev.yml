@@ -20,7 +20,10 @@ jobs:
     secrets:
       vault_token: ${{ secrets.vault_token }}
 
-  Test:
-    uses: azure-prep/roboshop-github-actions/.github/workflows/test.yml@main
+  Dev_Deploy:
+    uses: azure-prep/roboshop-github-actions/.github/workflows/aks-deploy.yml@main
     with:
-      appType: ${{ inputs.appType }}
+      resource_group_name: ukwest-dev
+      appEnv: dev-dev
+    secrets:
+      vault_token: ${{ secrets.vault_token }}
