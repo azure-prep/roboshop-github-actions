@@ -10,5 +10,5 @@ then echo "Set NAME variable to github runner name"
 exit 1
 fi
 
-./config.sh --url https://github.com/azure-prep --token ${TOKEN} --unattended --name ${NAME} --work _work--replace
+./config.sh --url https://github.com/azure-prep --token ${TOKEN} --unattended --name ${NAME} --work _work --replace
 exec ./run.sh
