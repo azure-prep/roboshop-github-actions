@@ -50,4 +50,5 @@ jobs:
           az login --service-principal  --username ${TF_VAR_ARM_CLIENT_ID} --password ${TF_VAR_ARM_CLIENT_SECRET} --tenant ${TF_VAR_ARM_TENANT_ID};
           az acr login --name azuredevopsb84.azurecr.io
           az aks get-credentials --resource-group roboshop-${{inputs.resource_group_name}} --name  main-${{inputs.appEnv}} --overwrite-existing
+          echo ${{ github.sha }}
           helm upgrade -i ${{inputs.appName}} . -f  env-dev/${{inputs.appName}}.yaml -n app --create-namespace --set appTag=${{ github.sha }}
