@@ -1,4 +1,4 @@
-name: CI -  dev
+name: CI -  Build and Deploy
 on:
   workflow_call:
     inputs:
@@ -27,6 +27,5 @@ jobs:
       resource_group_name: 'ukwest-dev'
       appEnv: 'dev-dev'
       appName: ${{ inputs.appName }}
-      appTag: 'latest'
     secrets:
       vault_token: ${{ secrets.vault_token }}

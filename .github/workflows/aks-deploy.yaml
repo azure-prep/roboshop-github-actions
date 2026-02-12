@@ -1,12 +1,9 @@
-name: CI - dev
+name: AKS Deploy
 
 on:
   workflow_call:
     inputs:
       appName:
-        required: true
-        type: string
-      appTag:
         required: true
         type: string
       resource_group_name:
@@ -20,7 +17,7 @@ on:
         required: true
 
 jobs:
-  Build:
+  Aks_Deploy:
     runs-on: self-hosted
     steps:
       - name: Checkout code
@@ -53,4 +50,4 @@ jobs:
           az login --service-principal  --username ${TF_VAR_ARM_CLIENT_ID} --password ${TF_VAR_ARM_CLIENT_SECRET} --tenant ${TF_VAR_ARM_TENANT_ID};
           az acr login --name azuredevopsb84.azurecr.io
           az aks get-credentials --resource-group roboshop-${{inputs.resource_group_name}} --name  main-${{inputs.appEnv}} --overwrite-existing
-          helm upgrade -i ${{inputs.appName}} . -f  env-dev/${{inputs.appName}}.yaml -n app --create-namespace --set appTag=${{ inputs.appTag }}
+          helm upgrade -i ${{inputs.appName}} . -f  env-dev/${{inputs.appName}}.yaml -n app --create-namespace --set appTag=${{ github.sha }}
