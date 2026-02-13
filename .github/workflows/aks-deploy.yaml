@@ -51,6 +51,7 @@ jobs:
           az acr login --name azuredevopsb84.azurecr.io
           az aks get-credentials --resource-group roboshop-${{inputs.resource_group_name}} --name  main-${{inputs.appEnv}} --overwrite-existing
           echo ${{ github.sha }}
+          kubectl create ns app || true
           argocd login $(kubectl get svc argo-cd-argocd-server -n argocd -o=jsonpath='{.status.loadBalancer.ingress[].ip}') --insecure --username admin --password $(kubectl get secrets argocd-initial-admin-secret -n argocd  -o=jsonpath='{.data.password}' |base64 --decode)
           argocd app create ${{ inputs.appName }} --repo https://github.com/azure-prep/roboshop-helm.git --path . --dest-namespace app --dest-server https://kubernetes.default.svc --values env-dev/${{ inputs.appName }}.yaml --helm-set appTag=${{ github.sha }} --upsert
           argocd app sync ${{ inputs.appName }}
