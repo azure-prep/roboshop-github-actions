@@ -16,7 +16,7 @@ RUN               chmod +x main.sh
 RUN               curl -L -o actions-runner-linux-x64-2.331.0.tar.gz \
                    https://github.com/actions/runner/releases/download/v2.331.0/actions-runner-linux-x64-2.331.0.tar.gz \
                    && tar xzf actions-runner-linux-x64-2.331.0.tar.gz \
-                   && rm actions-runner-linux-x64-2.331.0.tar.gz \
+                   && rm actions-runner-linux-x64-2.331.0.tar.gz
 RUN               dnf install https://github.com/aquasecurity/trivy/releases/download/v0.65.0/trivy_0.65.0_Linux-64bit.rpm -y
 RUN               chown -R github:github /home/github
 USER              github
