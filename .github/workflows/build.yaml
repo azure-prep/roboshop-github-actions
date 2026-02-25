@@ -61,4 +61,5 @@ jobs:
           az login --service-principal  --username ${TF_VAR_ARM_CLIENT_ID} --password ${TF_VAR_ARM_CLIENT_SECRET} --tenant ${TF_VAR_ARM_TENANT_ID};
           az acr login --name azuredevopsb84.azurecr.io
           docker build -t azuredevopsb84.azurecr.io/roboshop-${{ inputs.appName }}:${{ github.sha }} .
+          trivy image azuredevopsb84.azurecr.io/roboshop-${{ inputs.appName }}:${{ github.sha }} --severity HIGH,CRITICAL --ignore-unfixed --exit-code 0
           docker push azuredevopsb84.azurecr.io/roboshop-${{ inputs.appName }}:${{ github.sha }}
